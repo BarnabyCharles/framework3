@@ -18,6 +18,7 @@ func RegisterGRPC(host string, port int, register func(s *grpc.Server)) error {
 	s := grpc.NewServer()
 	reflection.Register(s)
 	register(s)
+	log.Println(listen.Addr())
 	if err := s.Serve(listen); err != nil {
 		log.Fatalf("Failed to start the service%v", err)
 		return err
