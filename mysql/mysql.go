@@ -9,9 +9,9 @@ import (
 
 var Db *gorm.DB
 
-func InitMysql() error {
+func InitMysql(user, pass, host, dbname string, port int) error {
 	var err error
-	dsn := fmt.Sprintf("root:yuling@tcp(127.0.0.1:3306)/zg5?parseTime=true")
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?parseTime=true", user, pass, host, port, dbname)
 	Db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
